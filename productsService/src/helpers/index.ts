@@ -6,10 +6,8 @@ type AsyncFunction = (
   next: NextFunction
 ) => Promise<any>
 
-const asyncFunction =
+export const asyncFunction =
   <R extends {}>(execution: AsyncFunction) =>
   (req: Request, res: Response, next: NextFunction) => {
     execution(req, res, next).catch(next)
   }
-
-export default asyncFunction

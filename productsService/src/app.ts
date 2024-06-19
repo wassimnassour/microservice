@@ -3,6 +3,7 @@ import { Response } from "express"
 import dotenv from "dotenv"
 import { errorMiddleWare } from "./middelwares/errorMidellware"
 import "./database"
+import { productRouter } from "./routes"
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.use(
 app.get("/productsService", (_: any, res: Response) => {
   res.send("Hello from productsService")
 })
+app.use(productRouter)
 
 app.use(errorMiddleWare)
 
