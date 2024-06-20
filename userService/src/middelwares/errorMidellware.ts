@@ -11,6 +11,7 @@ export const errorMiddleWare = (
   if (err instanceof ApiError) {
     ApiError.handle(err, res)
   } else {
+    console.log(err.message)
     res.send("Something went wrong")
   }
 }
