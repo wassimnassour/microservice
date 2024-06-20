@@ -6,6 +6,11 @@ import {
   getProductDetailsController,
   updateProductController,
 } from "../controllers"
+import {
+  createProductSchema,
+  productDetailsSchema,
+} from "../validation/products"
+import validator, { ValidationSource } from "../helpers/validatorSchema"
 
 export const productRouter = express()
 
@@ -17,11 +22,19 @@ productRouter.get("/products", getListAllProductsController)
 productRouter.get("/product", getOneProductController)
 
 // list product details
-productRouter.get("/product", getProductDetailsController)
+productRouter.get(
+  "/product/:id",
+  validator(productDetailsSchema, ValidationSource["PARAM"]),
+  getProductDetailsController
+)
 
 // POST request
 // create a new product
-productRouter.post("/product", createProductController)
+productRouter.post(
+  "/product",
+  validator(createProductSchema, ValidationSource["BODY"]),
+  createProductController
+)
 
 // PUT request
 // update a product

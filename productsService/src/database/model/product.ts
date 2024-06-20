@@ -4,7 +4,7 @@ export default interface Product {
   _id: Types.ObjectId
   title?: string
   image: string
-  decription?: string
+  description?: string
   status?: boolean
   createdAt?: Date
   updatedAt?: Date
@@ -15,13 +15,12 @@ const product = new Schema<Product>({
     type: Schema.Types.String,
     required: true,
     trim: true,
-    unique: true,
+    unique: false,
   },
-  decription: {
+  description: {
     type: Schema.Types.String,
     required: true,
     trim: true,
-    unique: true,
   },
   status: Schema.Types.Boolean,
   createdAt: Schema.Types.Date,
