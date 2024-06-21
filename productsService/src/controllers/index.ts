@@ -3,7 +3,8 @@ import * as productsRepo from "../database/repositiry/products"
 import { asyncFunction } from "../helpers"
 
 export const getListAllProductsController = asyncFunction(async (req, res) => {
-  res.send("list all PRODUCTs")
+  const products = await productsRepo.getAllProducts()
+  res.send(products)
 })
 
 export const getOneProductController = asyncFunction(async (req, res) => {

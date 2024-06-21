@@ -11,4 +11,10 @@ const getProductDetails = async (productId: string) => {
   const product = ProductsModel.findOne({ _id: productId })
   return product
 }
-export { createProduct, getProductDetails }
+
+const getAllProducts = async () => {
+  const products = ProductsModel.find()
+  return products
+}
+
+export { createProduct, getAllProducts, getProductDetails }
