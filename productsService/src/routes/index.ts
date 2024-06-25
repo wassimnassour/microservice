@@ -9,6 +9,7 @@ import {
 import {
   createProductSchema,
   productDetailsSchema,
+  updateProductSchema,
 } from "../validation/products"
 import validator, { ValidationSource } from "../helpers/validatorSchema"
 
@@ -39,7 +40,11 @@ productRouter.post(
 // PUT request
 // update a product
 
-productRouter.put("/product", updateProductController)
+productRouter.put(
+  "/product",
+  validator(updateProductSchema, ValidationSource["BODY"]),
+  updateProductController
+)
 
 // DELETE request
 // delete a product

@@ -28,12 +28,21 @@ export const createProductController = asyncFunction(async (req, res) => {
     if (!product) return new BadRequestError("Error creating product")
     res.status(201).send(product)
   } catch (error) {
-    return new BadRequestError("Error creating product")
+    throw new BadRequestError("Error creating product")
   }
 })
 
 export const updateProductController = asyncFunction(async (req, res) => {
-  res.send("list createProductController")
+  try {
+    const isUpdated = await productsRepo.updateProduct(req.body.id, req.body)
+    console.log("req.body", req.body)
+
+    if (!isUpdated) return new BadRequestError("Error updating product")
+    res.send(isUpdated)
+  } catch (error: any) {
+    console.log("error", error?.message)
+    throw new BadRequestError(`Error updating product: ${error?.message}`)
+  }
 })
 
 export const deleteProductController = asyncFunction(async (req, res) => {

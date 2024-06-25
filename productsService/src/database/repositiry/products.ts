@@ -1,5 +1,6 @@
 import { ObjectId } from "mongoose"
 import Product, { ProductsModel } from "../model/product"
+import { BadRequestError } from "../../core/apiError"
 
 const createProduct = async (product: Product) => {
   const createdProduct = new ProductsModel(product)
@@ -17,4 +18,28 @@ const getAllProducts = async () => {
   return products
 }
 
-export { createProduct, getAllProducts, getProductDetails }
+const updateProduct = async (
+  productId: string,
+  newProduct: Partial<Product>
+) => {
+  const product = await ProductsModel.findOne({ _id: productId }).exec()
+
+  if (!product) throw new BadRequestError("Product not found")
+  const keys = Object.keys(newProduct) as (keyof Product)[]
+  keys.forEach((key) => {
+    if (
+      product[key] != undefined &&
+      key in product &&
+      newProduct[key as keyof Product] !== undefined
+    ) {
+      // @ts-ignore
+      product[key] = newProduct[key]
+    }
+  })
+
+  await product?.save()
+
+  return product
+}
+
+export { createProduct, getAllProducts, getProductDetails, updateProduct }

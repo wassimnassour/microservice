@@ -17,8 +17,9 @@ export const deleteProductSchema = Joi.object<Product>({
   image: Joi.any().required(),
 })
 
-export const updateProductSchema = Joi.object<Product>({
+export const updateProductSchema = Joi.object({
+  id: Joi.string().required(),
   title: Joi.string(),
   description: Joi.string().max(20),
-  image: Joi.any().required(),
+  image: Joi.any(),
 })
