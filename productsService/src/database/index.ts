@@ -3,7 +3,9 @@ import mongoose from "mongoose"
 const mongoUri =
   "mongodb+srv://loop:8nz3NrVvJ4qBmmUp@cluster0.1hc8nrr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-mongoose.connect(mongoUri, {})
+const db = mongoose.connect(mongoUri, {})
+
+//
 
 mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected")
