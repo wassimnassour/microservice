@@ -21,8 +21,7 @@ export const productRouter = express()
 // list all products
 productRouter.get("/products", getListAllProductsController)
 
-// list product by category and filter form
-productRouter.get("/product", getOneProductController)
+// TODO: list product by category and filter form
 
 // list product details
 productRouter.get(
