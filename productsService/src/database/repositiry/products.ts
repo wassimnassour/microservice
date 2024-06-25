@@ -42,4 +42,15 @@ const updateProduct = async (
   return product
 }
 
-export { createProduct, getAllProducts, getProductDetails, updateProduct }
+const deleteProduct = async (productId: string) => {
+  const product = await ProductsModel.deleteOne({ _id: productId }).exec()
+  return product
+}
+
+export {
+  createProduct,
+  getAllProducts,
+  getProductDetails,
+  updateProduct,
+  deleteProduct,
+}

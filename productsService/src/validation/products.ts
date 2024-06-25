@@ -11,10 +11,8 @@ export const productDetailsSchema = Joi.object({
   id: Joi.string().required(),
 })
 
-export const deleteProductSchema = Joi.object<Product>({
-  title: Joi.string().required(),
-  description: Joi.string().max(20).required(),
-  image: Joi.any().required(),
+export const deleteProductSchema = Joi.object({
+  id: Joi.string().required(),
 })
 
 export const updateProductSchema = Joi.object({

@@ -1,6 +1,7 @@
 import express from "express"
 import {
   createProductController,
+  deleteProductController,
   getListAllProductsController,
   getOneProductController,
   getProductDetailsController,
@@ -8,6 +9,7 @@ import {
 } from "../controllers"
 import {
   createProductSchema,
+  deleteProductSchema,
   productDetailsSchema,
   updateProductSchema,
 } from "../validation/products"
@@ -48,4 +50,8 @@ productRouter.put(
 
 // DELETE request
 // delete a product
-productRouter.delete("/product", updateProductController)
+productRouter.delete(
+  "/product/:id",
+  validator(deleteProductSchema, ValidationSource["PARAM"]),
+  deleteProductController
+)

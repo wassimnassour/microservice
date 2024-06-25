@@ -7,7 +7,6 @@ export const errorMiddleWare = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("Hello from server Error", err)
   if (err instanceof ApiError) {
     ApiError.handle(err, res)
   } else {

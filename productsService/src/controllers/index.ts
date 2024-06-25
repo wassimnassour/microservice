@@ -1,4 +1,5 @@
 import { BadRequestError } from "../core/apiError"
+import { SuccessMsgResponse } from "../core/apiResponse"
 import * as productsRepo from "../database/repositiry/products"
 import { asyncFunction } from "../helpers"
 
@@ -45,6 +46,16 @@ export const updateProductController = asyncFunction(async (req, res) => {
   }
 })
 
-export const deleteProductController = asyncFunction(async (req, res) => {
-  res.send("list deleteProductController")
+export const deleteProductController = asyncFunction(async (req, res, next) => {
+  try {
+    const product = await productsRepo.deleteProduct(req.params.id)
+    if (product.deletedCount === 1) {
+      new SuccessMsgResponse("product deleted successfully").send(res)
+    } else {
+      throw new BadRequestError("Error deleting product")
+    }
+  } catch (error) {
+    // throw new BadRequestError("Error deleting product")
+    next(new BadRequestError("Error deleting product"))
+  }
 })
