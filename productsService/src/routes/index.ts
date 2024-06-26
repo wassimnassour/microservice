@@ -3,7 +3,6 @@ import {
   createProductController,
   deleteProductController,
   getListAllProductsController,
-  getOneProductController,
   getProductDetailsController,
   updateProductController,
 } from "../controllers"

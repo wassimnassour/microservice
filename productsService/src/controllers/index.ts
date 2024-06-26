@@ -8,10 +8,6 @@ export const getListAllProductsController = asyncFunction(async (req, res) => {
   res.send(products)
 })
 
-export const getOneProductController = asyncFunction(async (req, res) => {
-  res.send("list getOneProductController")
-})
-
 export const getProductDetailsController = asyncFunction(async (req, res) => {
   try {
     const product = await productsRepo.getProductDetails(
