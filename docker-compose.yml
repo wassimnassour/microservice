@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  apigateway:
+    build:
+      context: ./apiGatway
+      dockerfile: Dockerfile
+    image: wassim/apigateway
+    ports:
+      - "3000:3000"
+
+  products:
+    build:
+      context: ./productsService/
+      dockerfile: Dockerfile
+    image: wassim/products
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    depends_on:
+      - apigateway
