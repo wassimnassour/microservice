@@ -22,6 +22,4 @@ app.use(productRouter)
 
 app.use(errorMiddleWare)
 
-// app.use((req, res, next) => next(new NotFoundError()))
-
 export { app }
