@@ -9,6 +9,18 @@ services:
     ports:
       - "3000:3000"
 
+  authentication:
+    build:
+      context: ./userService/
+      dockerfile: Dockerfile
+    image: wassim/authentication
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+    # depends_on:
+    #   - products
+
   products:
     build:
       context: ./productsService/

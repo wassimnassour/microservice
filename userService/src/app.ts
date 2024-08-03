@@ -1,11 +1,12 @@
+import dotenv from "dotenv"
+dotenv.config()
+
 import express from "express"
 import { Response } from "express"
-import dotenv from "dotenv"
+
 import { authRouter } from "./routes/auth"
 import { errorMiddleWare } from "./middelwares/errorMidellware"
 import "./database"
-
-dotenv.config()
 
 const app = express()
 
