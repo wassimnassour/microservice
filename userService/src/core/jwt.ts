@@ -1,9 +1,13 @@
 import { promisify } from "util"
-import { sign, JwtPayload, verify } from "jsonwebtoken"
+import { sign, JwtPayload, verify, SignOptions } from "jsonwebtoken"
 import { tokenInfo } from "../config"
 
 interface IJwtPayload extends JwtPayload {
   user: string
+}
+
+const options: SignOptions = {
+  algorithm: "HS256",
 }
 
 const encode = async (payload: IJwtPayload): Promise<string> => {
@@ -17,9 +21,8 @@ const encode = async (payload: IJwtPayload): Promise<string> => {
       ...payload,
     },
     tokenInfo.secretKey as any,
-    {
-      algorithm: "none",
-    }
+    // @ts-ignore
+    options as SignOptions
   )
 }
 
