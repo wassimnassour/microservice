@@ -26,6 +26,7 @@ export const loginController = asyncFunction(async (req, res) => {
   }
 
   const tokens = await JWT.createTokens(user[0]._id)
+  console.log("verify token", await JWT.validate(tokens.token))
 
   res.send({
     user,

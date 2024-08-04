@@ -18,8 +18,8 @@ services:
       - "4000:4000"
     environment:
       - PORT=4000
-    # depends_on:
-    #   - products
+    depends_on:
+      - apigateway
 
   products:
     build:
