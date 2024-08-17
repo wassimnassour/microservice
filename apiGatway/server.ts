@@ -1,13 +1,26 @@
+import {
+  authenticationServiceUrl,
+  productsServiceUrl,
+} from "./constants/services"
 import { asyncFunction } from "./helpers/asyncFunction"
+import { ErrorLogger, loggerAllRequests } from "./middelwares/logger"
 
 const express = require("express")
 const { createProxyMiddleware } = require("http-proxy-middleware")
 
 const app = express()
 
-// TODO: need to implement service discovery
-const productsServiceUrl = "http://localhost:8080/"
-const authenticationServiceUrl = "http://localhost:4000/"
+app.use((req: any, res: any, next: any) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`)
+  next()
+})
+
+app.use(
+  // express.json({ limit: "5mb" }),
+  // express.urlencoded({ limit: "5mb", extended: true, parameterLimit: 10000 }),
+  loggerAllRequests
+)
+
 app.use(
   "/products",
   createProxyMiddleware({
@@ -31,6 +44,8 @@ app.get(
   })
 )
 
+console.log("🛑 HEHEHEH")
+app.use(ErrorLogger)
 app.listen(3000, () => {
   console.log("Api Gateway is running on port 3000")
 })
